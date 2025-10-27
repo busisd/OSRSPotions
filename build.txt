@@ -1,0 +1,3 @@
+displayName = OSRS Potions
+author = busisd
+version = 0.1
