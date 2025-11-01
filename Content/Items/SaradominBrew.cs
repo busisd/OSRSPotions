@@ -1,16 +1,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using OSRSPotions.Content.Buffs;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace OSRSPotions.Content.Items
 {
     // See: https://github.com/tModLoader/tModLoader/blob/b8a5a286c8bcf872e7d836f3f0238f97331d17c9/ExampleMod/Content/Items/CustomItemDrawingShowcase.cs#L16
-    public class SaradominBrew : OSRSPotion
+    public class SaradominBrew : OSRSBuffPotion
     {
         private static Asset<Texture2D> dosesTexture;
         public override void Load()
@@ -20,19 +19,35 @@ namespace OSRSPotions.Content.Items
         }
         public override Asset<Texture2D> DosesTexture() => dosesTexture;
 
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(SuperDefencePotionBuff.SuperDefencePotionBonus);
+
         public override void SetDefaults()
         {
             base.SetDefaults();
 
-            Item.healLife = 150;
+            Item.healLife = 160;
             Item.potion = true;
+
+            Item.buffType = ModContent.BuffType<SuperDefencePotionBuff>();
+            Item.buffTime = 60 * 60 * 6;
         }
 
-        public override void OnConsumeItem(Player player)
+        public override List<int> WeakerIncompatibleBuffs()
         {
-            base.OnConsumeItem(player);
-            // TODO: Custom buff? Should share super defence buff probably
-            player.AddBuff(BuffID.Endurance, 60 * 60 * 6);
+            return [ModContent.BuffType<DefencePotionBuff>()];
+        }
+
+        public override List<int> StrongerIncompatibleBuffs()
+        {
+            return [ModContent.BuffType<SuperCombatPotionBuff>()];
+        }
+
+        public override bool ConsumeItem(Player player)
+        {
+            // Handles setting/replacing the defence buff
+            base.ConsumeItem(player);
+            // Always consume the potion to restore life
+            return true;
         }
     }
 }

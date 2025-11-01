@@ -1,60 +1,140 @@
 # This file will automatically update with entries for new content after a build and reload.
 
 Items: {
-	TempItemABC: {
-		DisplayName: Temp Item A B C
-		Tooltip:
-			'''
-			Template of an item
-			Replacing this tooltip is duty 
-			It's snowing on Mt.Fuji
-			'''
-	}
-
-	TempItem: {
-		DisplayName: Temp Item
-		Tooltip: ""
-	}
-
 	AttackPotion: {
 		DisplayName: Attack Potion
-		Tooltip: ""
-	}
-
-	DefencePotion: {
-		DisplayName: Defence Potion
-		Tooltip: ""
+		Tooltip: Increases melee attack speed by {0}%
 	}
 
 	StrengthPotion: {
 		DisplayName: Strength Potion
-		Tooltip: ""
+		Tooltip: Increases melee damage by {0}%
+	}
+
+	DefencePotion: {
+		DisplayName: Defence Potion
+		Tooltip: Increases defence by {0}
 	}
 
 	SuperAttackPotion: {
 		DisplayName: Super Attack Potion
-		Tooltip: ""
-	}
-
-	SuperDefencePotion: {
-		DisplayName: Super Defence Potion
-		Tooltip: ""
+		Tooltip: Increases melee attack speed by {0}%
 	}
 
 	SuperStrengthPotion: {
 		DisplayName: Super Strength Potion
-		Tooltip: ""
+		Tooltip: Increases melee damage by {0}%
+	}
+
+	SuperDefencePotion: {
+		DisplayName: Super Defence Potion
+		Tooltip: Increases defence by {0}
+	}
+
+	SuperCombatPotion: {
+		DisplayName: Super Combat Potion
+		Tooltip:
+			'''
+			Increases melee attack speed by {0}%
+			Increases melee damage by {1}%
+			Increases defence by {2}
+			'''
+	}
+
+	MagicPotion: {
+		DisplayName: Magic Potion
+		Tooltip: Increases magic damage by {0}%
+	}
+
+	AncientBrew: {
+		DisplayName: Ancient Brew
+		Tooltip: Increases magic damage by {0}% and max mana by {1}
+	}
+
+	RangingPotion: {
+		DisplayName: Ranging Potion
+		Tooltip: Increases ranged damage by {0}%
+	}
+
+	SuperRangingPotion: {
+		DisplayName: Super Ranging Potion
+		Tooltip: Increases ranged damage by {0}% and crit by {1}%
 	}
 
 	SaradominBrew: {
 		DisplayName: Saradomin Brew
+		Tooltip: Increases defence by {0}
+	}
+
+	PrayerPotion: {
+		DisplayName: Prayer Potion
 		Tooltip: ""
+	}
+
+	SuperRestorePotion: {
+		DisplayName: Super Restore Potion
+		Tooltip: Removes stat-reducing debuffs
 	}
 }
 
 Buffs: {
 	AttackPotionBuff: {
 		DisplayName: Attack Potion Buff
-		Description: Mods.OSRSPotions.Buffs.AttackPotionBuff.Description
+		Description: "{0}% increased melee attack speed"
+	}
+
+	StrengthPotionBuff: {
+		DisplayName: Strength Potion Buff
+		Description: "{0}% increased melee damage"
+	}
+
+	DefencePotionBuff: {
+		DisplayName: Defence Potion Buff
+		Description: +{0} defence
+	}
+
+	SuperAttackPotionBuff: {
+		DisplayName: Super Attack Potion Buff
+		Description: "{0}% increased melee attack speed"
+	}
+
+	SuperStrengthPotionBuff: {
+		DisplayName: Super Strength Potion Buff
+		Description: "{0}% increased melee damage"
+	}
+
+	SuperDefencePotionBuff: {
+		DisplayName: Super Defence Potion Buff
+		Description: +{0} defence
+	}
+
+	SuperCombatPotionBuff: {
+		DisplayName: Super Combat Potion Buff
+		Description:
+			'''
+			{0}% increased melee attack speed
+			{1}% increased melee damage
+			+{2} defence
+			'''
+	}
+
+	MagicPotionBuff: {
+		DisplayName: Magic Potion Buff
+		Description: "{0}% increased magic damage"
+	}
+
+	AncientBrewBuff: {
+		DisplayName: Ancient Brew Buff
+		Description: "{0}% increased magic damage and +{1} max mana"
+	}
+
+	RangingPotionBuff: {
+		DisplayName: Ranging Potion Buff
+		Description: "{0}% increased ranged damage"
+	}
+
+	SuperRangingPotionBuff: {
+		DisplayName: Super Ranging Potion Buff
+		Description: "{0}% increased ranged damage and {1}% crit"
 	}
 }

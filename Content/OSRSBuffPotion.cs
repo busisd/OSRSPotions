@@ -16,7 +16,7 @@ namespace OSRSPotions.Content
 
         public override bool ConsumeItem(Player player)
         {
-            if (StrongerIncompatibleBuffs().Exists((strongerBuffId) => player.HasBuff(strongerBuffId)))
+            if (StrongerIncompatibleBuffs().Exists(player.HasBuff))
             {
                 player.ClearBuff(Item.buffType);
                 return false;

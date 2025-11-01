@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 namespace OSRSPotions.Content.Items
 {
     // See: https://github.com/tModLoader/tModLoader/blob/b8a5a286c8bcf872e7d836f3f0238f97331d17c9/ExampleMod/Content/Items/CustomItemDrawingShowcase.cs#L16
-    public class DefencePotion : OSRSBuffPotion
+    public class SuperCombatPotion : OSRSBuffPotion
     {
         private static Asset<Texture2D> dosesTexture;
         public override void Load()
@@ -19,24 +19,33 @@ namespace OSRSPotions.Content.Items
         }
         public override Asset<Texture2D> DosesTexture() => dosesTexture;
 
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DefencePotionBuff.DefencePotionBonus);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(SuperAttackPotionBuff.SuperAttackPotionBonus * 100,
+            SuperStrengthPotionBuff.SuperStrengthPotionBonus * 100,
+            SuperDefencePotionBuff.SuperDefencePotionBonus);
 
         public override void SetDefaults()
         {
             base.SetDefaults();
 
-            Item.buffType = ModContent.BuffType<DefencePotionBuff>();
+            Item.buffType = ModContent.BuffType<SuperCombatPotionBuff>();
             Item.buffTime = 60 * 60 * 6;
         }
 
         public override List<int> WeakerIncompatibleBuffs()
         {
-            return [];
+            return [
+                ModContent.BuffType<AttackPotionBuff>(),
+                ModContent.BuffType<StrengthPotionBuff>(),
+                ModContent.BuffType<DefencePotionBuff>(),
+                ModContent.BuffType<SuperAttackPotionBuff>(),
+                ModContent.BuffType<SuperStrengthPotionBuff>(),
+                ModContent.BuffType<SuperDefencePotionBuff>(),
+            ];
         }
 
         public override List<int> StrongerIncompatibleBuffs()
         {
-            return [ModContent.BuffType<SuperDefencePotionBuff>(), ModContent.BuffType<SuperCombatPotionBuff>()];
+            return [];
         }
 
     }

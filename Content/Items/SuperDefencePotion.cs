@@ -1,8 +1,9 @@
 using Microsoft.Xna.Framework.Graphics;
+using OSRSPotions.Content.Buffs;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace OSRSPotions.Content.Items
@@ -18,23 +19,24 @@ namespace OSRSPotions.Content.Items
         }
         public override Asset<Texture2D> DosesTexture() => dosesTexture;
 
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(SuperDefencePotionBuff.SuperDefencePotionBonus);
+
         public override void SetDefaults()
         {
             base.SetDefaults();
 
-            // TODO: Custom buff strengths for normal and super versions
-            Item.buffType = BuffID.Rage;
+            Item.buffType = ModContent.BuffType<SuperDefencePotionBuff>();
             Item.buffTime = 60 * 60 * 6;
         }
 
         public override List<int> WeakerIncompatibleBuffs()
         {
-            return [];
+            return [ModContent.BuffType<DefencePotionBuff>()];
         }
 
         public override List<int> StrongerIncompatibleBuffs()
         {
-            return [];
+            return [ModContent.BuffType<SuperCombatPotionBuff>()];
         }
 
     }

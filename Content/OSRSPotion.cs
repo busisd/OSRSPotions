@@ -7,9 +7,6 @@ using Terraria.ModLoader;
 
 namespace OSRSPotions.Content
 {
-    // TODO: Finish implementing other unimplemented potions
-    // TODO: Add antipoison potions?
-
     // See: https://github.com/tModLoader/tModLoader/blob/b8a5a286c8bcf872e7d836f3f0238f97331d17c9/ExampleMod/Content/Items/CustomItemDrawingShowcase.cs#L16
     public abstract class OSRSPotion : ModItem
     {
