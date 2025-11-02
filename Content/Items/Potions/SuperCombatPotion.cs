@@ -3,10 +3,11 @@ using OSRSPotions.Content.Buffs;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace OSRSPotions.Content.Items
+namespace OSRSPotions.Content.Items.Potions
 {
     // See: https://github.com/tModLoader/tModLoader/blob/b8a5a286c8bcf872e7d836f3f0238f97331d17c9/ExampleMod/Content/Items/CustomItemDrawingShowcase.cs#L16
     public class SuperCombatPotion : OSRSBuffPotion
@@ -29,6 +30,8 @@ namespace OSRSPotions.Content.Items
 
             Item.buffType = ModContent.BuffType<SuperCombatPotionBuff>();
             Item.buffTime = 60 * 60 * 6;
+
+            Item.value = Item.buyPrice(0, 0, 30, 0);
         }
 
         public override List<int> WeakerIncompatibleBuffs()
@@ -46,6 +49,16 @@ namespace OSRSPotions.Content.Items
         public override List<int> StrongerIncompatibleBuffs()
         {
             return [];
+        }
+
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe(3);
+            recipe.AddIngredient<SuperAttackPotion>(3);
+            recipe.AddIngredient<SuperStrengthPotion>(3);
+            recipe.AddIngredient<SuperDefencePotion>(3);
+            recipe.AddTile(TileID.Bottles);
+            recipe.Register();
         }
 
     }

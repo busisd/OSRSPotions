@@ -75,6 +75,71 @@ Items: {
 		DisplayName: Super Restore Potion
 		Tooltip: Removes stat-reducing debuffs
 	}
+
+	VialOfWater: {
+		DisplayName: Vial of Water
+		Tooltip: ""
+	}
+
+	GuamSeed: {
+		DisplayName: Guam Seed
+		Tooltip: Grows into Guam Leaf, used in low-level potions.
+	}
+
+	SnapdragonSeed: {
+		DisplayName: Snapdragon Seed
+		Tooltip: Grows into Snapdragon, used in high-level potions.
+	}
+
+	GuamLeaf: {
+		DisplayName: Guam Leaf
+		Tooltip: Used in low-level potions.
+	}
+
+	Snapdragon: {
+		DisplayName: Snapdragon
+		Tooltip: Used in high-level potions.
+	}
+
+	EyeOfNewt: {
+		DisplayName: Eye of Newt
+		Tooltip: Used in attack potions.
+	}
+
+	LimpwurtRoot: {
+		DisplayName: Limpwurt Root
+		Tooltip: Used in strength potions.
+	}
+
+	WhiteBerries: {
+		DisplayName: White Berries
+		Tooltip: Used in defence potions.
+	}
+
+	PotatoCactus: {
+		DisplayName: Potato Cactus
+		Tooltip: Used in magic potions.
+	}
+
+	WineOfZamorak: {
+		DisplayName: Wine of Zamorak
+		Tooltip: Used in ranging potions.
+	}
+
+	SnapeGrass: {
+		DisplayName: Snape Grass
+		Tooltip: Used in prayer potions.
+	}
+
+	CrushedNest: {
+		DisplayName: Crushed Nest
+		Tooltip: Used in Saradomin brews.
+	}
+
+	RedSpidersEggs: {
+		DisplayName: Red Spiders' Eggs
+		Tooltip: Used in super restore potions.
+	}
 }
 
 Buffs: {
@@ -165,9 +230,15 @@ NPCs: {
 			Standard2: I follow the teachings of Guthix, the God of balance.
 			Standard3: Would you like some herblore training? I've got plenty of seeds and materials to spare.
 			Standard4: Your herblore level is low, you should get back to training.
+			Rare1: Guttthhhiixxxx!... Sorry, I don't know what came over me.
 		}
 	}
 }
 
 Bestiary.GuthixianDruid: This druid worships Guthix, the God of balance. He's an expert in herblore, the druidic art of mixing potions.
 Emotes.GuthixianDruidEmote.Command: guthixiandruid
+
+Tiles: {
+	GuamPlant.MapEntry: Guam Plant
+	SnapdragonPlant.MapEntry: Snapdragon Plant
+}

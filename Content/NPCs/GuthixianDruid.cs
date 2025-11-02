@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using OSRSPotions.Content.EmoteBubbles;
-using OSRSPotions.Content.Items;
+using OSRSPotions.Content.Items.Ingredients;
+using OSRSPotions.Content.Items.Seeds;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
@@ -168,6 +169,7 @@ namespace OSRSPotions.Content.NPCs
             chat.Add(this.GetLocalization("Dialogue.Standard2").Value);
             chat.Add(this.GetLocalization("Dialogue.Standard3").Value);
             chat.Add(this.GetLocalization("Dialogue.Standard4").Value);
+            chat.Add(this.GetLocalization("Dialogue.Rare1").Value, .25);
 
             string chosenChat = chat; // chat is implicitly cast to a string. This is where the random choice is made.
 
@@ -191,7 +193,17 @@ namespace OSRSPotions.Content.NPCs
         public override void AddShops()
         {
             var npcShop = new NPCShop(Type, ShopName)
-                .Add(new Item(ModContent.ItemType<AncientBrew>()));
+                .Add(new Item(ModContent.ItemType<VialOfWater>()))
+                .Add(new Item(ModContent.ItemType<GuamSeed>()))
+                .Add(new Item(ModContent.ItemType<SnapdragonSeed>()), Condition.Hardmode)
+                .Add(new Item(ModContent.ItemType<EyeOfNewt>()))
+                .Add(new Item(ModContent.ItemType<LimpwurtRoot>()))
+                .Add(new Item(ModContent.ItemType<WhiteBerries>()))
+                .Add(new Item(ModContent.ItemType<PotatoCactus>()))
+                .Add(new Item(ModContent.ItemType<WineOfZamorak>()))
+                .Add(new Item(ModContent.ItemType<SnapeGrass>()))
+                .Add(new Item(ModContent.ItemType<CrushedNest>()), Condition.Hardmode)
+                .Add(new Item(ModContent.ItemType<RedSpidersEggs>()), Condition.Hardmode);
             npcShop.Register();
         }
 

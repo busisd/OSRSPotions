@@ -1,9 +1,12 @@
 using Microsoft.Xna.Framework.Graphics;
+using OSRSPotions.Content.Items.Herbs;
+using OSRSPotions.Content.Items.Ingredients;
 using ReLogic.Content;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace OSRSPotions.Content.Items
+namespace OSRSPotions.Content.Items.Potions
 {
     // See: https://github.com/tModLoader/tModLoader/blob/b8a5a286c8bcf872e7d836f3f0238f97331d17c9/ExampleMod/Content/Items/CustomItemDrawingShowcase.cs#L16
     public class PrayerPotion : OSRSPotion
@@ -21,7 +24,18 @@ namespace OSRSPotions.Content.Items
             base.SetDefaults();
 
             Item.healMana = 120;
-            Item.potion = true;
+
+            Item.value = Item.buyPrice(0, 0, 5, 0);
         }
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe(3);
+            recipe.AddIngredient<VialOfWater>();
+            recipe.AddIngredient<GuamLeaf>();
+            recipe.AddIngredient<SnapeGrass>();
+            recipe.AddTile(TileID.Bottles);
+            recipe.Register();
+        }
+
     }
 }

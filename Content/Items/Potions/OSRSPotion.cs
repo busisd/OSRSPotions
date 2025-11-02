@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace OSRSPotions.Content
+namespace OSRSPotions.Content.Items.Potions
 {
     // See: https://github.com/tModLoader/tModLoader/blob/b8a5a286c8bcf872e7d836f3f0238f97331d17c9/ExampleMod/Content/Items/CustomItemDrawingShowcase.cs#L16
     public abstract class OSRSPotion : ModItem
@@ -82,14 +82,6 @@ namespace OSRSPotions.Content
             Item.consumable = true;
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.buyPrice(gold: 1);
-        }
-
-        // TODO: Better recipe
-        public override void AddRecipes()
-        {
-            Recipe recipe = CreateRecipe(3);
-            recipe.AddIngredient(ItemID.DirtBlock, 1);
-            recipe.Register();
         }
     }
 }

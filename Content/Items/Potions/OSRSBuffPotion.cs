@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 
-namespace OSRSPotions.Content
+namespace OSRSPotions.Content.Items.Potions
 {
     public abstract class OSRSBuffPotion : OSRSPotion
     {

@@ -1,12 +1,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using OSRSPotions.Content.Buffs;
+using OSRSPotions.Content.Items.Herbs;
+using OSRSPotions.Content.Items.Ingredients;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace OSRSPotions.Content.Items
+namespace OSRSPotions.Content.Items.Potions
 {
     // See: https://github.com/tModLoader/tModLoader/blob/b8a5a286c8bcf872e7d836f3f0238f97331d17c9/ExampleMod/Content/Items/CustomItemDrawingShowcase.cs#L16
     public class MagicPotion : OSRSBuffPotion
@@ -27,6 +30,8 @@ namespace OSRSPotions.Content.Items
 
             Item.buffType = ModContent.BuffType<MagicPotionBuff>();
             Item.buffTime = 60 * 60 * 6;
+
+            Item.value = Item.buyPrice(0, 0, 5, 0);
         }
 
         public override List<int> WeakerIncompatibleBuffs()
@@ -38,6 +43,16 @@ namespace OSRSPotions.Content.Items
         {
             return [ModContent.BuffType<AncientBrewBuff>()];
         }
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe(3);
+            recipe.AddIngredient<VialOfWater>();
+            recipe.AddIngredient<GuamLeaf>();
+            recipe.AddIngredient<PotatoCactus>();
+            recipe.AddTile(TileID.Bottles);
+            recipe.Register();
+        }
+
 
     }
 }
