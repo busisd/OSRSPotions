@@ -20,17 +20,9 @@ namespace OSRSPotions.Content.NPCs
     public class GuthixianDruid : ModNPC
     {
         public const string ShopName = "Shop";
-        //public int NumberOfTimesTalkedTo = 0;
 
         private static int ShimmerHeadIndex;
         private static Profiles.StackedNPCProfile NPCProfile;
-
-        //public static LocalizedText UpgradedText { get; private set; }
-
-        // Sets a unique message when the NPC dies.
-        // See also NPCID.Sets.IsTownChild if you just want the message used by Angler and Princess.
-        // See ModifyDeathMessage() way below for more details
-        //public override LocalizedText DeathMessage => this.GetLocalization("DeathMessage");
 
         public override void Load()
         {
@@ -56,22 +48,17 @@ namespace OSRSPotions.Content.NPCs
             // Connects this NPC with a custom emote.
             // This makes it when the NPC is in the world, other NPCs will "talk about him".
             // By setting this you don't have to override the PickEmote method for the emote to appear.
-            // TODO: Re-enable? https://github.com/tModLoader/tModLoader/blob/16bc2558e453edf7f60dee1b1f308c9fb48581cf/ExampleMod/Content/EmoteBubbles/NPCEmotes.cs#L39
             NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<GuthixianDruidEmote>();
 
             // Influences how the NPC looks in the Bestiary
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
                 Velocity = 1f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
-                               //Direction = 1 // -1 is left and 1 is right. NPCs are drawn facing the left by default but GuthixianDruid will be drawn facing the right
-                               // Rotation = MathHelper.ToRadians(180) // You can also change the rotation of an NPC. Rotation is measured in radians
-                               // If you want to see an example of manually modifying these when the NPC is drawn, see PreDraw
             };
 
             NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
 
             // Set Example Person's biome and neighbor preferences with the NPCHappiness hook. You can add happiness text and remarks with localization (See an example in ExampleMod/Localization/en-US.lang).
-            // NOTE: The following code uses chaining - a style that works due to the fact that the SetXAffection methods return the same NPCHappiness instance they're called on.
             NPC.Happiness
                 .SetBiomeAffection<ForestBiome>(AffectionLevel.Like) // Example Person prefers the forest.
                 .SetBiomeAffection<DesertBiome>(AffectionLevel.Dislike) // Example Person dislikes the snow.
@@ -82,15 +69,9 @@ namespace OSRSPotions.Content.NPCs
 
             // This creates a "profile" for GuthixianDruid, which allows for different textures during a party and/or while the NPC is shimmered.
             NPCProfile = new Profiles.StackedNPCProfile(
-                //new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture), Texture + "_Party"),
-                //new Profiles.DefaultNPCProfile(Texture + "_Shimmer", ShimmerHeadIndex, Texture + "_Shimmer_Party")
                 new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture)),
                 new Profiles.DefaultNPCProfile(Texture + "_Shimmer", ShimmerHeadIndex)
             );
-
-            ContentSamples.NpcBestiaryRarityStars[Type] = 3; // We can override the default bestiary star count calculation by setting this.
-
-            //UpgradedText = this.GetLocalization("Upgraded");
         }
 
         public override void SetDefaults()
@@ -120,29 +101,8 @@ namespace OSRSPotions.Content.NPCs
 
 				// Sets your NPC's flavor text in the bestiary. (use localization keys)
 				new FlavorTextBestiaryInfoElement("Mods.OSRSPotions.Bestiary.GuthixianDruid"),
-
-				// You can add multiple elements if you really wanted to
-				//new FlavorTextBestiaryInfoElement("Mods.ExampleMod.Bestiary.GuthixianDruid_2")
             ]);
         }
-
-        // The PreDraw hook is useful for drawing things before our sprite is drawn or running code before the sprite is drawn
-        // Returning false will allow you to manually draw your NPC
-        //public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-        //{
-        //    // This code slowly rotates the NPC in the bestiary
-        //    // (simply checking NPC.IsABestiaryIconDummy and incrementing NPC.Rotation won't work here as it gets overridden by drawModifiers.Rotation each tick)
-        //    if (NPCID.Sets.NPCBestiaryDrawOffset.TryGetValue(Type, out NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers))
-        //    {
-        //        drawModifiers.Rotation += 0.001f;
-
-        //        // Replace the existing NPCBestiaryDrawModifiers with our new one with an adjusted rotation
-        //        NPCID.Sets.NPCBestiaryDrawOffset.Remove(Type);
-        //        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
-        //    }
-
-        //    return true;
-        //}
 
         public override void HitEffect(NPC.HitInfo hit)
         {
@@ -160,8 +120,6 @@ namespace OSRSPotions.Content.NPCs
                 string variant = "";
                 if (NPC.IsShimmerVariant)
                     variant += "_Shimmer";
-                //if (NPC.altTexture == 1)
-                //    variant += "_Party";
                 int hatGore = NPC.GetPartyHatGore();
                 int headGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Head").Type;
                 int armGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Arm").Type;
@@ -180,60 +138,10 @@ namespace OSRSPotions.Content.NPCs
             }
         }
 
-        //public override void OnSpawn(IEntitySource source)
-        //{
-        //    if (source is EntitySource_SpawnNPC)
-        //    {
-        //        // A TownNPC is "unlocked" once it successfully spawns into the world.
-        //        TownNPCRespawnSystem.unlockedGuthixianDruidSpawn = true;
-        //    }
-        //}
-
         public override bool CanTownNPCSpawn(int numTownNPCs)
         { // Requirements for the town NPC to spawn.
-            //if (TownNPCRespawnSystem.unlockedGuthixianDruidSpawn)
-            //{
-            //    // If Example Person has spawned in this world before, we don't require the user satisfying the ExampleItem/ExampleBlock inventory conditions for a respawn.
-            //    return true;
-            //}
-
-            //foreach (var player in Main.ActivePlayers)
-            //{
-            //    // Player has to have either an ExampleItem or an ExampleBlock in order for the NPC to spawn
-            //    if (player.inventory.Any(item => item.type == ModContent.ItemType<ExampleItem>() || item.type == ModContent.ItemType<Items.Placeable.ExampleBlock>()))
-            //    {
-            //        return true;
-            //    }
-            //}
-
-            //return false;
-
             return NPC.downedSlimeKing || NPC.downedBoss1;
         }
-
-        // Example Person needs a house built out of ExampleMod tiles. You can delete this whole method in your townNPC for the regular house conditions.
-        //public override bool CheckConditions(int left, int right, int top, int bottom)
-        //{
-        //    int score = 0;
-        //    for (int x = left; x <= right; x++)
-        //    {
-        //        for (int y = top; y <= bottom; y++)
-        //        {
-        //            int type = Main.tile[x, y].TileType;
-        //            if (type == ModContent.TileType<ExampleBlock>() || type == ModContent.TileType<ExampleChair>() || type == ModContent.TileType<ExampleWorkbench>() || type == ModContent.TileType<ExampleBed>() || type == ModContent.TileType<ExampleDoorOpen>() || type == ModContent.TileType<ExampleDoorClosed>())
-        //            {
-        //                score++;
-        //            }
-
-        //            if (Main.tile[x, y].WallType == ModContent.WallType<ExampleWall>())
-        //            {
-        //                score++;
-        //            }
-        //        }
-        //    }
-
-        //    return score >= ((right - left) * (bottom - top)) / 2;
-        //}
 
         public override ITownNPCProfile TownNPCProfile()
         {
@@ -251,55 +159,17 @@ namespace OSRSPotions.Content.NPCs
             };
         }
 
-        //public override void FindFrame(int frameHeight)
-        //{
-        /*npc.frame.Width = 40;
-        if (((int)Main.time / 10) % 2 == 0)
-        {
-            npc.frame.X = 40;
-        }
-        else
-        {
-            npc.frame.X = 0;
-        }*/
-        //}
-
         public override string GetChat()
         {
             WeightedRandom<string> chat = new WeightedRandom<string>();
 
-            //int partyGirl = NPC.FindFirstNPC(NPCID.PartyGirl);
-            //if (partyGirl >= 0 && Main.rand.NextBool(4))
-            //{
-            //    chat.Add(Language.GetTextValue("Mods.ExampleMod.Dialogue.GuthixianDruid.PartyGirlDialogue", Main.npc[partyGirl].GivenName));
-            //}
             // These are things that the NPC has a chance of telling you when you talk to it.
             chat.Add(this.GetLocalization("Dialogue.Standard1").Value);
             chat.Add(this.GetLocalization("Dialogue.Standard2").Value);
             chat.Add(this.GetLocalization("Dialogue.Standard3").Value);
             chat.Add(this.GetLocalization("Dialogue.Standard4").Value);
-            //chat.Add(Language.GetTextValue("Mods.ExampleMod.Dialogue.GuthixianDruid.StandardDialogue1"));
-            //chat.Add(Language.GetTextValue("Mods.ExampleMod.Dialogue.GuthixianDruid.StandardDialogue3"));
-            //chat.Add(Language.GetTextValue("Mods.ExampleMod.Dialogue.GuthixianDruid.StandardDialogue3"));
-            //chat.Add(Language.GetTextValue("Mods.ExampleMod.Dialogue.GuthixianDruid.StandardDialogue4"));
-            //chat.Add(Language.GetTextValue("Mods.ExampleMod.Dialogue.GuthixianDruid.CommonDialogue"), 5.0);
-            //chat.Add(Language.GetTextValue("Mods.ExampleMod.Dialogue.GuthixianDruid.RareDialogue"), 0.1);
-
-            //NumberOfTimesTalkedTo++;
-            //if (NumberOfTimesTalkedTo >= 10)
-            //{
-            //    // This counter is linked to a single instance of the NPC, so if GuthixianDruid is killed, the counter will reset.
-            //    chat.Add(Language.GetTextValue("Mods.ExampleMod.Dialogue.GuthixianDruid.TalkALot"));
-            //}
 
             string chosenChat = chat; // chat is implicitly cast to a string. This is where the random choice is made.
-
-            // Here is some additional logic based on the chosen chat line. In this case, we want to display an item in the corner for StandardDialogue4.
-            if (chosenChat == Language.GetTextValue("Mods.ExampleMod.Dialogue.GuthixianDruid.StandardDialogue4"))
-            {
-                // Main.npcChatCornerItem shows a single item in the corner, like the Angler Quest chat.
-                Main.npcChatCornerItem = ItemID.HiveBackpack;
-            }
 
             return chosenChat;
         }
@@ -307,34 +177,12 @@ namespace OSRSPotions.Content.NPCs
         public override void SetChatButtons(ref string button, ref string button2)
         { // What the chat buttons are when you open up the chat UI
             button = Language.GetTextValue("LegacyInterface.28"); // This is the key to the word "Shop"
-            //button2 = "Awesomeify";
-            //if (Main.LocalPlayer.HasItem(ItemID.HiveBackpack))
-            //{
-            //    button = "Upgrade " + Lang.GetItemNameValue(ItemID.HiveBackpack);
-            //}
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref string shop)
         {
             if (firstButton)
             {
-                // We want 3 different functionalities for chat buttons, so we use HasItem to change button 1 between a shop and upgrade action.
-
-                //if (Main.LocalPlayer.HasItem(ItemID.HiveBackpack))
-                //{
-                //    SoundEngine.PlaySound(SoundID.Item37); // Reforge/Anvil sound
-
-                //    Main.npcChatText = UpgradedText.Value;
-
-                //    int hiveBackpackItemIndex = Main.LocalPlayer.FindItem(ItemID.HiveBackpack);
-                //    var entitySource = NPC.GetSource_GiftOrReward();
-
-                //    Main.LocalPlayer.inventory[hiveBackpackItemIndex].TurnToAir();
-                //    Main.LocalPlayer.QuickSpawnItem(entitySource, ModContent.ItemType<WaspNest>());
-
-                //    return;
-                //}
-
                 shop = ShopName; // Name of the shop tab we want to open.
             }
         }
@@ -343,110 +191,12 @@ namespace OSRSPotions.Content.NPCs
         public override void AddShops()
         {
             var npcShop = new NPCShop(Type, ShopName)
-                //.Add<ExampleItem>()
-                ////.Add<EquipMaterial>()
-                ////.Add<BossItem>()
-                //.Add(new Item(ModContent.ItemType<Items.Placeable.Furniture.ExampleWorkbench>()) { shopCustomPrice = Item.buyPrice(copper: 15) }) // This example sets a custom price, ExampleNPCShop.cs has more info on custom prices and currency. 
-                //.Add<Items.Placeable.Furniture.ExampleChair>()
-                //.Add<Items.Placeable.Furniture.ExampleDoor>()
-                //.Add<Items.Placeable.Furniture.ExampleBed>()
-                //.Add<Items.Placeable.Furniture.ExampleChest>()
-                //.Add<Items.Tools.ExamplePickaxe>()
-                //.Add<Items.Tools.ExampleHamaxe>()
-                //.Add<Items.Consumables.ExampleHealingPotion>(new Condition("Mods.ExampleMod.Conditions.PlayerHasLifeforceBuff", () => Main.LocalPlayer.HasBuff(BuffID.Lifeforce)))
-                //.Add<Items.Weapons.ExampleSword>(Condition.MoonPhasesQuarter0)
-                ////.Add<ExampleGun>(Condition.MoonPhasesQuarter1)
-                //.Add<Items.Ammo.ExampleBullet>(Condition.MoonPhasesQuarter1)
-                //.Add<Items.Weapons.ExampleStaff>(ExampleConditions.DownedMinionBoss)
-                //.Add<ExampleOnBuyItem>()
-                //.Add(ItemID.AcornAxe) // Here is an example of how to sell an existing vanilla item.
-                //.Add<Items.Weapons.ExampleYoyo>(Condition.IsNpcShimmered); // Let's sell an yoyo if this NPC is shimmered!
                 .Add(new Item(ModContent.ItemType<AncientBrew>()));
-
-            //if (ModContent.GetInstance<ExampleModConfig>().ExampleWingsToggle)
-            //{
-            //    npcShop.Add<ExampleWings>(ExampleConditions.InExampleBiome);
-            //}
-
-            //if (ModContent.TryFind("SummonersAssociation/BloodTalisman", out ModItem bloodTalisman))
-            //{
-            //    npcShop.Add(bloodTalisman.Type);
-            //}
-            npcShop.Register(); // Name of this shop tab
+            npcShop.Register();
         }
-
-        //public override void ModifyActiveShop(string shopName, Item[] items)
-        //{
-        //    foreach (Item item in items)
-        //    {
-        //        // Skip 'air' items and null items.
-        //        if (item == null || item.type == ItemID.None)
-        //        {
-        //            continue;
-        //        }
-
-        //        // If NPC is shimmered then reduce all prices by 50%.
-        //        if (NPC.IsShimmerVariant)
-        //        {
-        //            int value = item.shopCustomPrice ?? item.value;
-        //            item.shopCustomPrice = value / 2;
-        //        }
-        //    }
-        //}
-
-        //public override void ModifyNPCLoot(NPCLoot npcLoot)
-        //{
-        //    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ExampleCostume>()));
-        //}
 
         // Make this Town NPC teleport to the King and/or Queen statue when triggered. Return toKingStatue for only King Statues. Return !toKingStatue for only Queen Statues. Return true for both.
         public override bool CanGoToStatue(bool toKingStatue) => toKingStatue;
-
-        // Make something happen when the npc teleports to a statue. Since this method only runs server side, any visual effects like dusts or gores have to be synced across all clients manually.
-        //public override void OnGoToStatue(bool toKingStatue)
-        //{
-        //    if (Main.netMode == NetmodeID.Server)
-        //    {
-        //        ModPacket packet = Mod.GetPacket();
-        //        packet.Write((byte)ExampleMod.MessageType.ExampleTeleportToStatue);
-        //        packet.Write((byte)NPC.whoAmI);
-        //        packet.Send();
-        //    }
-        //    else
-        //    {
-        //        StatueTeleport();
-        //    }
-        //}
-
-        // Create a square of pixels around the NPC on teleport.
-        //public void StatueTeleport()
-        //{
-        //    for (int i = 0; i < 30; i++)
-        //    {
-        //        Vector2 position = Main.rand.NextVector2Square(-20, 21);
-        //        if (Math.Abs(position.X) > Math.Abs(position.Y))
-        //        {
-        //            position.X = Math.Sign(position.X) * 20;
-        //        }
-        //        else
-        //        {
-        //            position.Y = Math.Sign(position.Y) * 20;
-        //        }
-
-        //        Dust.NewDustPerfect(NPC.Center + position, ModContent.DustType<Sparkle>(), Vector2.Zero).noGravity = true;
-        //    }
-        //}
-
-        //public override bool ModifyDeathMessage(ref NetworkText customText, ref Color color)
-        //{
-        //    // This example shows how you would further customize the message, in this case just for the shimmer variant.
-        //    if (NPC.IsShimmerVariant)
-        //    {
-        //        customText = NetworkText.FromKey(this.GetLocalizationKey("DeathMessageAlt"), NPC.GetFullNetName());
-        //        color = Color.Yellow;
-        //    }
-        //    return true;
-        //}
 
         public override void TownNPCAttackStrength(ref int damage, ref float knockback)
         {
@@ -470,38 +220,7 @@ namespace OSRSPotions.Content.NPCs
         {
             multiplier = 12f;
             randomOffset = 2f;
-            // SparklingBall is not affected by gravity, so gravityCorrection is left alone.
+            // EmeraldBolt is not affected by gravity, so gravityCorrection is left alone.
         }
-
-        //public override void LoadData(TagCompound tag)
-        //{
-        //    NumberOfTimesTalkedTo = tag.GetInt("numberOfTimesTalkedTo");
-        //}
-
-        //public override void SaveData(TagCompound tag)
-        //{
-        //    tag["numberOfTimesTalkedTo"] = NumberOfTimesTalkedTo;
-        //}
-
-        // Let the NPC "talk about" minion boss
-        //public override int? PickEmote(Player closestPlayer, List<int> emoteList, WorldUIAnchor otherAnchor)
-        //{
-        //    // By default this NPC will have a chance to use the Minion Boss Emote even if Minion Boss is not downed yet
-        //    int type = ModContent.EmoteBubbleType<MinionBossEmote>();
-        //    // If the NPC is talking to the Demolitionist, it will be more likely to react with angry emote
-        //    if (otherAnchor.entity is NPC { type: NPCID.Demolitionist })
-        //    {
-        //        type = EmoteID.EmotionAnger;
-        //    }
-
-        //    // Make the selection more likely by adding it to the list multiple times
-        //    for (int i = 0; i < 4; i++)
-        //    {
-        //        emoteList.Add(type);
-        //    }
-
-        //    // Use this or return null if you don't want to override the emote selection totally
-        //    return base.PickEmote(closestPlayer, emoteList, otherAnchor);
-        //}
     }
 }
