@@ -32,7 +32,7 @@ namespace OSRSPotions.Content.Items.Potions
             Item.potion = true;
 
             Item.buffType = ModContent.BuffType<SuperDefencePotionBuff>();
-            Item.buffTime = 60 * 60 * 6;
+            Item.buffTime = 60 * 60 * 1;
 
             Item.value = Item.buyPrice(0, 0, 15, 0);
         }

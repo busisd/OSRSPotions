@@ -1,1 +1,25 @@
-Modify this file with a description of your mod.
+Adds potions from Old School RuneScape (OSRS) to Terraria!
+
+After killing King Slime or the Eye of Cthulhu, a Guthixian Druid will arrive in your world. Buy seeds to grow guam plants; then, buy vials and secondary ingredients to mix powerful potions from the world of Gielinor. Use attack, strength, defence, magic, and ranging potions to boost your combat prowess and defeat your enemies, and drink prayer potions to recover your mana!
+
+Once you reach hardmode, the Druid wil sell snapdragon seeds, unlocking a new tier of even more powerful potions. Super attack, strength, defence, magic, and ranging potions give double the boost of their pre-hardmode counterparts; plus, Saradomin Brews and Super Restores restore your health and mana with an extra bonus on top!
+
+Potions are crafted with a vial of water, a guam or snapdragon leaf (grown from seeds), and a secondary ingredient. Each craft outputs three doses, and each dose lasts 6 minutes. Note that potions of the same type don't stack: for example, a super attack potion will override the buff from an attack potion.
+
+List of pre-hardmode potions, crafted with guam and a secondary ingredient:
+- Attack potion (eye of newt): +8% melee attack speed
+- Strength potion (limpwurt root): +5% melee damage
+- Defence potion (white berries): +8 defence
+- Magic potion (potato cactus): +5% magic damage
+- Ranging potion (wine of Zamorak): +5% ranged damage
+- Prayer potion (snape grass): restores 120 mana
+
+List of hardmode potions, crafted with snapdragon and a secondary ingredient:
+- Super attack potion (eye of newt): +16% melee attack speed
+- Super strength potion (limpwurt root): +10% melee damage
+- Super defence potion (white berries): +16 defence
+- Ancient brew (potato cactus): +10% magic damage and +40 max mana
+- Super ranging potion (wine of Zamorak): +10% ranged damage and +5% ranged crit chance
+- Super restore potion (red spiders' eggs): restores 250 mana and removes stat-reducing debuffs including slow, chilled, weak, and broken armor
+- Saradomin brew (crushed nest): restores 160 health and gives a super defence buff for one minute
+- Super combat potion (crafted from a super attack, strength, and defence potion): combines the effects of the potions used to create it
