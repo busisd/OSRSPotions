@@ -14,5 +14,8 @@ namespace OSRSPotions
         // TODO: Finish item descriptions
         // TODO: Druid NPC
         // TODO: Better potion recipes. (Vials?)
+        // TODO: Set prices correctly
+        // TODO: Shimmering the potions?
+        // TODO: Shimmer variant of druid (Green for guthix?)
     }
 }

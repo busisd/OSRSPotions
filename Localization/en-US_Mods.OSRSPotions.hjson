@@ -138,3 +138,36 @@ Buffs: {
 		Description: "{0}% increased ranged damage and {1}% crit"
 	}
 }
+
+NPCs: {
+	GuthixianDruid: {
+		DisplayName: Guthixian Druid
+
+		TownNPCMood: {
+			Content: This is a nice town, it reminds me of Taverly.
+			NoHome: Even a druid needs shelter.
+			FarFromHome: I'm too far from home, could you spare some law runes?
+			LoveSpace: I'm happy there's enough space to enjoy nature.
+			DislikeCrowded: It's a bit too crowded around here.
+			HateCrowded: It's far too crowded, I can't even enjoy nature.
+			LikeBiome: I like {BiomeName}, there's plenty of herbs to gather!
+			DislikeBiome: I dislike {BiomeName}, it's too hot and there's hardly any plants.
+			LoveNPC: "{NPCName} strives for balance, she's a true follower of Guthix!"
+			LikeNPC: I like {NPCName}, he makes some interesting potions.
+			DislikeNPC: "{NPCName} is too noisy, she should learn to appreciate nature."
+			HateNPC: That red cape... I fear {NPCName} may be a worshipper of Zamorak!
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+
+		Dialogue: {
+			Standard1: All in all, this world isn't too different from Gielinor.
+			Standard2: I follow the teachings of Guthix, the God of balance.
+			Standard3: Would you like some herblore training? I've got plenty of seeds and materials to spare.
+			Standard4: Your herblore level is low, you should get back to training.
+		}
+	}
+}
+
+Bestiary.GuthixianDruid: This druid worships Guthix, the God of balance. He's an expert in herblore, the druidic art of mixing potions.
+Emotes.GuthixianDruidEmote.Command: guthixiandruid
